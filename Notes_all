@@ -65,8 +65,10 @@ Can be handle in code <->can not be handle in code(ex: StackOverFlow or OutOfMem
 
 Collections: Lists
 ArrayList vs LinkedList
+- vectors are discontinues because arraylist is thread safe
 Access by index <-> Had to iterate through
 HashMap vs HashSets
+
 
 OOP
 Inheritance -> interface + abstract class +final
