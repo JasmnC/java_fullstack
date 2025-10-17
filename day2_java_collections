@@ -1,0 +1,18 @@
+Collections: Lists
+ArrayList vs LinkedList
+Access by index <-> Had to iterate through
+HashMap vs HashSets
+
+
+OOP
+Inheritance -> interface + abstract class +final
+Encapsulation -> access modifier
+Polymorphism -> override vs overload
+Abstraction ->interface + abstract class
+
+SOLID
+They are Achrinom for principles
+S: single responsibility
+O: open/closed
+L: Lonskov principle
+D: dependency injection
