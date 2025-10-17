@@ -1,6 +1,6 @@
 Singleton
+- to ensure only one once
 Lazy loading
-Eager loading
 //lazy loading
 public class Singleton{
     private static Singleton instance;
@@ -13,6 +13,10 @@ public class Singleton{
         Return instance
     }
 }
+Eager loading
+//  private static *final* EagerInitializedSingleton instance = new EagerInitializedSingleton();
+
+
 
 Access Modifier: public, private, default*, protected*考點
 default is the default, gives package level accessibility for field, method, class
@@ -29,6 +33,8 @@ It’s a method
 Access elements from template
 JVM calls it, and only executed once when loading, compile before run
 * JVM’s structure –> contains stack, heap, PC register, method area, native method area
+- heap vs stack: 
+- only inner class can be static
 Static are sorted in method area
 
 Final keyword
@@ -41,6 +47,10 @@ declare final
 declare private
 only use getters, no setters
 actively do deep copy
+
+Finally vs Finalize
+- try-catch-finally
+- finalize() for garbage collection
 
 Override vs Overload
 both concepts of polymorphism
@@ -58,10 +68,13 @@ Exception Handling
 Throw vs Throws
 Use in the function <-> use in the function signature
 “try-catch-finally”
-Types of exceptions: runtime, compile time
+- throwable interface for exception customization
+Types of exceptions: runtime time(use keyword to handle it, or else it will throw error ), compile time(have to use try-catch-finally or program will not run at all)
+- extend exception parts
 All errors came from throwable class unless handled by try-catch
 Exceptions vs Error
 Can be handle in code <->can not be handle in code(ex: StackOverFlow or OutOfMemory)
+- exception status code?
 
 Collections: Lists
 ArrayList vs LinkedList
