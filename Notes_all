@@ -24,10 +24,12 @@ protected=default+sub-class(gives parent/child access)
 private is only available in class
 
 What is Class?
-Class is a template
+Class is a template, basicallt a blue print
 * object/instance vs template ->objects should declare by new keyword
 * other templates include Interface, Abstract Class, (not a template but a annotation) enum
- 
+- Interface vs abtract class
+  multiple <-> one 
+
 Static keyword
 It’s a method
 Access elements from template
@@ -55,14 +57,73 @@ Finally vs Finalize
 Override vs Overload
 both concepts of polymorphism
 Run time <--> compile time
-In between classes(parent child) <--> within the same class
+In between classes(parent child) <--> multiple same name +different parameter methods within the same class
+
 
 Factory Design Pattern
 Scenario e-commerce is using 2 payment method, say paypal and cc
+- any access modifier for interface is public
+- avoid using double or float, because they cause inaccuracy(accuracy depends on if 1st bit sign or not)
+
 Double vs double:
 double is primitive, Double is referenced data type 
-* 8 primitive byte, short, int, long, float, double, boolean, char
-Java uses wrapper class and autoboxing(Double) to make primitive behave like objects, to achieve OOP
+* 8 primitives(small->big)(numeric) byte, short, int, long, float, double, (non-numeric) boolean, char
+Since primitive types are not an object, java uses wrapper class and autoboxing(Double) to make primitive behave like objects, to achieve OOP
+- primitive data types vs reference 
+  sort in stack <-> reference stor in heap and object sort in stack
+
+Some string examples:
+// String
+-> Constant String pool -> heap
+// String VS StringBuilder vs StringBuffer ->
+// String
+comparison -> equals vs
+* String s1 = "a";
+* String s2 = "a";
+* String s3 = new String("a");
+* String s4 = new String("a");
+* System.out.println(s1.equals(s2));
+* System.out.println(s3.equals(s4));
+* System.out.println(s1==s2);
+*System.out.printin（53==54）
+
+
+
+Payment Code
+interface Payment(){
+  void Pay(Dicimal amount);
+}
+
+class PayPalPayment implements Payment{
+    public void pay(double money){
+        System.out.println("Pay pal");
+    }
+}
+
+class CreditCardPayment implements Payment{
+    public void pay(double money){
+        System.out.println("credit card payment");
+    }
+}
+
+class PaymentFactory {
+    public static Payment createPayment(String type)  {
+        switch(type.toLowerCase()) {
+            case "paypal": return new PayPalPayment();
+            case "creditcard": return new CreditCardPayment();
+            default:
+                try {
+                    throw new IllegalAccessException("unknown type" + type);
+                } catch (IllegalAccessException e) {
+                    System.out.println(e.getMessage());
+                    // logger.debug();
+                    // loger.info();
+                } finally {
+
+                }
+        }
+    }
+}
 
 Exception Handling
 Throw vs Throws
@@ -78,10 +139,19 @@ Can be handle in code <->can not be handle in code(ex: StackOverFlow or OutOfMem
 
 Collections: Lists
 ArrayList vs LinkedList
-- vectors are discontinues because arraylist is thread safe
-Access by index <-> Had to iterate through
-HashMap vs HashSets
+access by index <-> Had to iterate through
+backed by dynamic arrays <-> when there's a lot of inserts
+- (lagacy) vectors are discontinues because arraylist is thread safe
+- stack
 
+Collections: Queue
+priority queue: heap by default
+
+- comparible vs comparitor
+compare on itself<->based on lambda expression
+
+Collections: Set
+HashMap vs HashSets
 
 OOP
 Inheritance -> interface + abstract class +final
