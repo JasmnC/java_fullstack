@@ -1,0 +1,80 @@
+Singleton
+- to ensure only one once
+
+Access Modifier: 
+* for field, method, class
+
+Class
+* other templates include Interface, Abstract Class, (not a template but a annotation) enum
+- Interface vs abtract class
+  multiple <-> one 
+
+Static keyword
+It’s a method, access elements from template
+
+heap vs stack: 
+- only inner class can be static
+
+Final keyword
+It’s a modifier, can be apply on field, method, class
+For field: the value can only be assign once, means reference cannot be change, but the object itself can still be update
+For method: can not be override by sub-class
+For class: can not be extend, often used for Immutable class
+
+Override vs Overload
+both concepts of polymorphism
+Run time <--> compile time
+In between classes(parent child) <--> multiple same name +different parameter methods within the same class
+
+Exception Handling
+throw vs throws
+All errors came from throwable class unless handled by try-catch
+Exceptions vs Error
+Can be handle in code <->can not be handle in code(ex: StackOverFlow or OutOfMemory)
+
+  
+- any access modifier for interface is public
+- avoid using double or float, because they cause inaccuracy(accuracy depends on if 1st bit sign or not)
+
+class PaymentFactory {
+    public static Payment createPayment(String type)  {
+        switch(type.toLowerCase()) {
+            case "paypal": return new PayPalPayment();
+            case "creditcard": return new CreditCardPayment();
+            default:
+                try {
+                    throw new IllegalAccessException("unknown type" + type);
+                } catch (IllegalAccessException e) {
+                    System.out.println(e.getMessage());
+                    // logger.debug();
+                    // loger.info();
+                } finally {
+                }
+        }
+    }
+}
+
+
+Collections: Lists
+backed by dynamic arrays <-> when there's a lot of inserts
+
+Collections: Queue
+priority queue: heap by default
+
+- comparible vs comparitor
+compare on itself<->based on lambda expression
+
+Collections: Set
+HashMap vs HashSets
+
+OOP
+Inheritance -> interface + abstract class +final
+Abstraction ->interface + abstract class
+
+  
+SOLID
+They are Achrinom for principles
+S: single responsibility
+O: open/closed
+L: Lonskov principle
+D: dependency injection
