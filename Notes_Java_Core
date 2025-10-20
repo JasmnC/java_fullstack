@@ -168,7 +168,7 @@ Multi-threading and Concurrency
 program vs process vs threads
 static code <-> execution of program <-> a execution rutine
 - one process is going to do 1 task and 1 task only
-- in between process, it's gerunteed that memory was isolated (cannot be share
+- in between process, it's gerunteed that memory was isolated (cannot be share)
 * Java is portable language, compile once(saved the compiled code on memory) and run on any machine
   .Class files(byte files)-> Class Loader -> Memory Area (RAM)
 * concurrent programming vs in-parallel program
@@ -184,7 +184,9 @@ jdk7
 jdk8 -> 2018, widly used but buggy, more stable ver compare to previous-> Spring framework booming
  jdk11 -> released "flight recorder", free version
 jdk17 -> Spring6/Springboot 3.0
-*recent 3-5 years a lot directly migrate from 8->17 and/or 8->11->17
-
+ * recent 3-5 years a lot directly migrate from 8->17 and/or 8->11->17
+ jdk19 -> virtual thread -> Loom project
+jdk21 -> virtual thread (normal object)
+* we DON'T use latest version
 
 
