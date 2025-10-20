@@ -170,5 +170,9 @@ static code <-> execution of program <-> a execution rutine
 - one process is going to do 1 task and 1 task only
 - in between process, it's gerunteed that memory was isolated (cannot be share)
 
+Java is portable language
+.Class files(byte files)-> Class Loader -> Memory Area (RAM)
+
+
 
 
