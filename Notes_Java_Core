@@ -189,4 +189,26 @@ jdk17 -> Spring6/Springboot 3.0
 jdk21 -> virtual thread (normal object)
 * we DON'T use latest version
 
+Lifecycle (status) of threads: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITEING, TERMINATED
 
+public class Day5 {
+    public static void main(String[] args){
+        new MyThread().start();
+//        new MyThread().run();
+        System.out.println("main thread");
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+    }
+}
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("my thread");
+    }
+}
+
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("my thread");
+    }
+}
