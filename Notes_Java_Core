@@ -16,8 +16,6 @@ public class Singleton{
 Eager loading
 //  private static *final* EagerInitializedSingleton instance = new EagerInitializedSingleton();
 
-
-
 Access Modifier: public, private, default*, protected*考點
 default is the default, gives package level accessibility for field, method, class
 protected=default+sub-class(gives parent/child access)
@@ -167,5 +165,10 @@ L: Lonskov principle
 D: dependency injection
 
 Multi-threading and Concurrency
+program vs process vs threads
+static code <-> execution of program <-> a execution rutine
+- one process is going to do 1 task and 1 task only
+- in between process, it's gerunteed that memory was isolated (cannot be share)
+
 
 
