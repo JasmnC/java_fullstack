@@ -212,3 +212,12 @@ class MyRunnable implements Runnable {
         System.out.println("my thread");
     }
 }
+
+Thread Safty
+concerns: hardware resources limitations
+threads don't share memory together
+* jvm structure
+* you need a thread to run Runnable
+*  *     MyRunnableTask task = new MyRunnableTask();    -> .java -> .class -> (i) creation of object
+*  *                                                                          (ii) find a space in heap
+*  *                                                                          (iii) assign reference to object
