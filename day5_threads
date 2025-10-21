@@ -1,0 +1,60 @@
+Multi-threading and Concurrency
+program vs process vs threads
+static code <-> execution of program <-> a execution rutine
+- one process is going to do 1 task and 1 task only
+- in between process, it's gerunteed that memory was isolated (cannot be share)
+* Java is portable language, compile once(saved the compiled code on memory) and run on any machine
+  .Class files(byte files)-> Class Loader -> Memory Area (RAM)
+* concurrent programming vs in-parallel program
+  concurrent: even when we just have 1 thread, we can switch between different program
+Ways to create threads:
+1. Thread Class
+2. Runnable Interface
+3. Callable Interface
+4. Thread Pool (technically web-based development, this is only thing you should use)
+
+history of jdk
+jdk7
+jdk8 -> 2018, widly used but buggy, more stable ver compare to previous-> Spring framework booming
+ jdk11 -> released "flight recorder", free version
+jdk17 -> Spring6/Springboot 3.0
+ * recent 3-5 years a lot directly migrate from 8->17 and/or 8->11->17
+ jdk19 -> virtual thread -> Loom project
+jdk21 -> virtual thread (normal object)
+* we DON'T use latest version
+
+Lifecycle (status) of threads: NEW, RUNNABLE, BLOCKED, WAITING, TIMED_WAITEING, TERMINATED
+
+public class Day5 {
+    public static void main(String[] args){
+        new MyThread().start();
+//        new MyThread().run();
+        System.out.println("main thread");
+
+        ExecutorService executorService = Executors.newCachedThreadPool();
+    }
+}
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("my thread");
+    }
+}
+
+class MyRunnable implements Runnable {
+    public void run() {
+        System.out.println("my thread");
+    }
+}
+
+start() vs run()
+API that initializes and creates a new thread (00:50:40). 
+  By examining the source code of the `start()` method, they noted it first checks the thread's status, ensuring it is a "new" thread (status 0) before proceeding. David Lu further detailed that Java threads have six specific states: New, Runnable, Blocked, Waiting, Timed Waiting, and Terminated, urging accuracy on these life cycle terms (00:52:40) (00:57:14).
+Understanding the `native` Keyword and Thread Methods David Lu guided the discussion on the `start0` function, noting its method signature without a body (00:58:54). Since the `Thread` class is not abstract, as confirmed by Weiyuan Wu, David Lu explained that the `native` keyword is the reason for this, indicating a method implemented in C and C++ and stored in the native method area (01:01:03) (01:04:18). Harris Yu and Chelsea Shi clarified that this acts as a "back door" to C and C++ APIs, allowing interaction with the OS layer for better performance (01:02:47). David Lu emphasized that calling the `start` method on a thread object, which executes the `start0` native method, is crucial for thread creation, and this method can only be called once, changing the thread state from "new" to "runnable" (01:04:18).
+Thread Creation Mechanisms David Lu outlined the two main options for thread creation: extending the `Thread` class or implementing the `Runnable` interface (01:06:14). Jasmine Chen suggested always using the `Runnable` interface for greater flexibility, a practice David Lu confirmed is generally preferred unless specific thread actions are needed. David Lu also introduced the `Callable` interface as an enhancement over `Runnable`, which is void, allowing for a return data type and the throwing of exceptions, as pointed out by Aaron Chen (01:08:33).
+The Importance of Thread Pools David Lu explained that traditional thread creation using the `new` keyword is discouraged because it triggers the `start0` native method, leading to significant overhead and performance impact due to interaction with the OS layer (01:10:22). To mitigate this, David Lu advocated for the exclusive use of a thread pool, which creates all necessary threads during the Java program's boot-up time, smoothing runtime performance. The thread pool recycles threads when a task is complete, returning the thread object to the pool for reuse (01:11:53).
+Thread Pool Configuration and Internal Mechanism The discussion transitioned to the seven key configurations for a thread pool: core pool size, maximum pool size, keep-alive time, time unit, work queue, thread factory, and handler (01:14:53). David Lu detailed the thread pool's internal workings, explaining that submitted tasks first check for available threads in the core pool. If the core pool is full, tasks are placed in the work queue (or waiting queue) (01:16:21). If the core pool is full and the waiting queue starts accumulating tasks, the maximum pool kicks in, creating emergent threads to handle the backlog as a buffering mechanism. If both pools and the queue are full, the handler defines the eventual resort, such as aborting the task or defining a return policy, which David Lu stressed should always be bounded to prevent running out of memory (01:17:47) (01:34:45).
+Critique of Built-in Thread Pools David Lu analyzed the `CachedThreadPool` example, noting its configuration of zero core pool size, an integer maximum pool size (2^31 - 1), and a 60-second thread lifetime (01:24:27). They criticized this built-in pool because creating threads during runtime, as this pool does, contradicts the principle of avoiding runtime thread creation due to performance overhead (01:28:29). David Lu highlighted the major concern of using an unlimited maximum pool size, explaining that such a configuration, especially under scenarios like a denial-of-service attack or high-volume events like Black Friday, risks an `OutOfMemoryException` and server shutdown (01:30:10).
+Best Practices for Thread Pool Design David Lu emphasized that software engineers must be wise when configuring the seven thread pool parameters, stressing the need for bounded resources, particularly for the waiting queue (01:34:45). David Lu advised against using built-in thread pools and instead recommended defining custom thread pools using `ThreadPoolExecutor` to enforce resource limits (01:36:12). In practice, they suggested using multiple thread pools, where high-priority tasks (like order processing) are submitted to a primary pool with larger resources, and minor tasks (like logging or email notifications) go to a secondary pool; a failure in the minor pool won't halt the company's core business (01:38:13).
+Asynchronous Programming with `CompletableFuture` David Lu introduced the concept of asynchronous request styles in web applications, noting that the synchronized style—where application one waits for application two's response—leads to low performance. Starting with Java 8, the `CompletableFuture` class was introduced as a replacement for the `Callable` and `FutureTask` implementations to enable asynchronous execution and chaining of tasks (01:41:49). Unlike `FutureTask`, where calling the `get` method blocks the main thread, `CompletableFuture` utilizes callback functions and allows the main thread to continue execution without blocking, thereby avoiding sequential execution and improving system performance (01:43:24) (01:50:36). David Lu confirmed that `CompletableFuture` tasks are submitted to the thread pool for execution (01:45:07).
+Expectations for Experience and Performance David Lu outlined the expectations for success, noting that while some contractor positions might ask for ten years of experience, they do not necessarily expect candidates to possess it. David Lu emphasized that beyond just correctness, candidates must be accurate and efficient, warning that merely doing 60% of their 60% instruction (36% overall) will not secure an offer (01:57:32). David Lu stressed the need for fluency, efficiency, and confidence, which requires consistent practice, especially over the weekends, and advised working on AWS and Java basics (01:58:53) (02:02:21).
