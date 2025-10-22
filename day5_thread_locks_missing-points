@@ -1,0 +1,14 @@
+
+* access the same resource is not a issue if they don't modify anything on that thread
+A trade-off between performance
+
+* you need a thread to run Runnable
+*  *     MyRunnableTask task = new MyRunnableTask();    -> .java -> .class -> (i) creation of object
+*  *                                                                          (ii) find a space in heap
+*  *                                                                          (iii) assign reference to object
+
+synchronized keyword -> use on method, block
+
+
+Lock lock = new Reentrantlock(); --> Condition ---> Thread -> Six state -> before start() NEW
+                                                                            after start() Runnable
