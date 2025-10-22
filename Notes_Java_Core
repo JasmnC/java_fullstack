@@ -219,9 +219,33 @@ concerns: 1. hardware resources limitations;
 (these are 2 different things)
 * threads don't share memory(resource) together
 * access the same resource is not a issue if they don't modify anything on that thread
+A trade-off between performance
 ex: too many request -> concurrency issue
 * jvm structure
 * you need a thread to run Runnable
 *  *     MyRunnableTask task = new MyRunnableTask();    -> .java -> .class -> (i) creation of object
 *  *                                                                          (ii) find a space in heap
 *  *                                                                          (iii) assign reference to object
+
+synchronized keyword -> use on method, block
+ public synchronized String myMethod() {
+     // logics before
+     // critical section (10 lines)
+     //logics after
+ }
+
+Lock -> Pessimistic vs Optisistic
+
+Lock lock = new Reentrantlock(); --> Condition ---> Thread -> Six state -> before start() NEW
+                                                                            after start() Runnable
+lock.lock()
+try {
+   // critical section
+} catch {
+  // critical section
+} finally {
+  // critical section
+  lock.unlock();
+}
+
+
