@@ -214,8 +214,12 @@ class MyRunnable implements Runnable {
 }
 
 Thread Safty
-concerns: hardware resources limitations
-threads don't share memory together
+concerns: 1. hardware resources limitations;
+         2. Thread safety -> concurrency issue -> read/write issue -> problem when one thread read the other thread write and the same time
+(these are 2 different things)
+* threads don't share memory(resource) together
+* access the same resource is not a issue if they don't modify anything on that thread
+ex: too many request -> concurrency issue
 * jvm structure
 * you need a thread to run Runnable
 *  *     MyRunnableTask task = new MyRunnableTask();    -> .java -> .class -> (i) creation of object
