@@ -1,0 +1,10 @@
+Spring framework
+1. A: AOP
+  - aspect oriented programming
+  - @Aspect: you can have different aspect doing different things, within the aspects, you can define:
+            -> logic(what I want to do),
+            (when) @Before(@annotation(com.example.annotation.Cachable)), @After, @AfterReturning, @AfterThrowing, @Around
+            -> @Pointcut("execution(*com.example.Service.UserService.*(...))")
+                public void myPointCutExecution(){}
+  * this is quite practical, make sure to know how to do it, what are the annotations you use, where did you use the AOP
+2. I: IOC
