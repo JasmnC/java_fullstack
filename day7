@@ -1,0 +1,8 @@
+Class Singleton {
+  private static Singleton interface;
+  private Singleton(){
+  }
+  private static Singleton getInstance(){
+    if (instance == null)
+  }
+}
