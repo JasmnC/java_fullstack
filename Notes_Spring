@@ -7,4 +7,5 @@ Spring framework
             -> @Pointcut("execution(*com.example.Service.UserService.*(...))")
                 public void myPointCutExecution(){}
   * this is quite practical, make sure to know how to do it, what are the annotations you use, where did you use the AOP
+  - use case: logging, log in(security check), 
 2. I: IOC
