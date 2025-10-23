@@ -16,7 +16,7 @@ public class Singleton{
 Eager loading
 //  private static *final* EagerInitializedSingleton instance = new EagerInitializedSingleton();
 
-Access Modifier: public, private, default*, protected*考點
+Access Modifier: public, private, default*, protected
 default is the default, gives package level accessibility for field, method, class
 protected=default+sub-class(gives parent/child access)
 private is only available in class
