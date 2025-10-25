@@ -5,3 +5,5 @@ What is maven?
                          download from central library to avoid melicious malware
                        2. package and scope management
                          -> manditory in pom.xml: groupId, artifactId, version
+                         -> have a universal place to save all package
+  *command+',' to access setting in IntelliJ, find maven under Settings > Build, Execution, Deployment > Build Tools > Maven
