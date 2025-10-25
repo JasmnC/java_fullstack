@@ -6,4 +6,6 @@ What is maven?
                        2. package and scope management
                          -> manditory in pom.xml: groupId, artifactId, version
                          -> have a universal place to save all package
+                       3. Life cycle management -> see the target folder, if you need a jar file to deploy to prod. 
+                                                  * click the package, it's going to go through the target folder, clean>reload>verify....see lifecycle it's in the exact order
   * command+',' to access setting in IntelliJ, find maven under Settings > Build, Execution, Deployment > Build Tools > Maven
