@@ -1,9 +1,9 @@
 What is maven?
   it is a auto building tool
   pain-point to solve: 1. dependency management -> under external libraries it's not just download jdk-jar files and done, you also have to import it 100 times
-                       1.5. Volunbility detection -> since it takes control of jdk-jars, maven helps keep track of the known bugs(mvnrepository.com)/
+                       1.5. Volurnbility detection -> since it takes control of jdk-jars, maven helps keep track of the known bugs(mvnrepository.com)/
                          download from central library to avoid melicious malware
                        2. package and scope management
                          -> manditory in pom.xml: groupId, artifactId, version
                          -> have a universal place to save all package
-  *command+',' to access setting in IntelliJ, find maven under Settings > Build, Execution, Deployment > Build Tools > Maven
+  * command+',' to access setting in IntelliJ, find maven under Settings > Build, Execution, Deployment > Build Tools > Maven
