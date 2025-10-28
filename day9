@@ -3,3 +3,5 @@ what is web-app? you can access on internet by IP
 let's say we have a code runnning on my machine, how do you share with others?
 iso image on cd disk -> that's the peice of code MS wants to share with you -> you are only running this version right now, not updated
 you have to be able to manage/update, centralized
+TCP/IP protocal: point to point connection
+client send request to server, server send respond
