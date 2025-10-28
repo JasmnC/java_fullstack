@@ -9,3 +9,29 @@ Spring framework
   * this is quite practical, make sure to know how to do it, what are the annotations you use, where did you use the AOP
   - use case: logging, log in(security check), 
 2. I: IOC
+
+
+What is maven?
+  A auto building tool.
+  pain-point to solve: 1. dependency management -> under external libraries it's not just download jdk-jar files and done, you also have to import it 100 times
+                       1.5. Volurnbility detection -> since it takes control of jdk-jars, maven helps keep track of the known bugs(mvnrepository.com)/
+                         download from central library to avoid melicious malware
+                       2. package and scope management
+                         -> manditory in pom.xml: groupId, artifactId, version
+                         -> have a universal place to save all package
+                       3. Life cycle management -> see the target folder, if you need a jar file to deploy to prod. 
+                                                  * click the package, it's going to go through the target folder, clean>reload>verify....see lifecycle it's in the exact order
+  * command+',' to access setting in IntelliJ, find maven under Settings > Build, Execution, Deployment > Build Tools > Maven
+  - repos
+    local vs central
+    sort on machine at ~/.m2/repository by default <-> https://repo.maven.apache.org/maven2
+  - setting.xml
+    -> set up proxy, servers, mirror, profiles, reporitory
+  - pom.xml(project object model)
+    -> dependencies, plug-in, build settings
+    *is the main config file for maven project
+    -> dependency coordinates: groupId, artifacts, version
+
+  - mavean Lifecycle
+    validate (check project stucture), compile(compile source code), test(run tests), package(build JAR), install (copy to local repo), deploy(publish to remote repo)
+    *can find on the right hand side panel when we click on maven
