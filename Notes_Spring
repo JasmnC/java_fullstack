@@ -1,14 +1,43 @@
 Spring framework
 1. A: AOP
   - aspect oriented programming
+  - What: Separates cross-cutting concerns (logging, security, transactions).(use case)
+    Why: Keep main logic clean; reusable aspects.
+    How: Uses **proxies** + **advice** around methods.
   - @Aspect: you can have different aspect doing different things, within the aspects, you can define:
             -> logic(what I want to do),
             (when) @Before(@annotation(com.example.annotation.Cachable)), @After, @AfterReturning, @AfterThrowing, @Around
             -> @Pointcut("execution(*com.example.Service.UserService.*(...))")
                 public void myPointCutExecution(){}
   * this is quite practical, make sure to know how to do it, what are the annotations you use, where did you use the AOP
-  - use case: logging, log in(security check), 
+  - Join Point → where advice applies (method call)
+  - Advice → code to run (before/after/around)
+  - Pointcut → expression matching join points
+  - Proxy → wrapper created by Spring to weave aspect logic
+
 2. I: IOC
+  - Inversion of Control
+  - What: Framework controls object creation & wiring instead of manual `new`.
+    Why: Decouples components → easier testing, maintainability.
+    How: Spring container creates & injects beans defined via XML, annotations, or Java config.
+  - Dependency Injection (3 styles)
+    1. Constructor Injection -> via constructor args. Immutable, good for required deps.
+    2. Setter Injection -> via setters. Optional deps, but mutable.
+    3. Field Injection -> via `@Autowired` on field. Simple but hard to test (no immutability).
+
+  - Bean scope:
+    * `singleton` (default) –> one per container
+    * `prototype` –> new each request
+    * `request`, `session`, `application` –> for web contexts
+
+  - Spring Container:
+    * `BeanFactory` (basic)
+    * `ApplicationContext` (advanced; adds event, i18n, etc.)
+
+  - Circular Dependency:
+    * Happens when A -> B -> A.
+    * Spring resolves via **setter/field injection**, but fails with **constructor injection**.
+
 
 
 What is maven?
