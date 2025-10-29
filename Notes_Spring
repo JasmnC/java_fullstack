@@ -64,3 +64,6 @@ What is maven?
   - mavean Lifecycle
     validate (check project stucture), compile(compile source code), test(run tests), package(build JAR), install (copy to local repo), deploy(publish to remote repo)
     *can find on the right hand side panel when we click on maven
+
+Spring Boot
+
