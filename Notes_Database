@@ -10,7 +10,7 @@ Optimistic lock vs pestimistic lock
 * implementation depends on what tool you chose, trade off pros and cons
 
 Distributed = when multiple microservices or DBs are involved.
-Distributed transaction concerns: when dif
+Distributed transaction concerns
 Approaches:
 1. Distributed Lock (e.g., Redis-based Redlock)
     One service holds a short lock while updating.
@@ -35,5 +35,7 @@ execution plan, explain statement
 2. Query optimization
 - Indexing: cluster index, primary key
 3. Cache
+
+ALWAYS LOCATE THE PROBLEM FIRST BEFORE JUMPING TO SOLUTION
 
 
