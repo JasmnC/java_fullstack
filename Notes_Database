@@ -1,5 +1,10 @@
 Transactions
 - a group of query that execute together
+
 Optimistic lock vs pestimistic lock
 - optemistic: we don't assume there's any error, we allow concurrency assume there's no conflicts
   - so how do we maintain thread safe?
+  - we have @Version spring-data-jpa will check / track -> but this is manual
+  - if things goes right, it's going to faster
+  - in JDBC you can also deal with and we use try-catch-finally block
+* implementation depends on what tool you chose, trade off pros and cons
