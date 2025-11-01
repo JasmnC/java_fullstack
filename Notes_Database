@@ -1,0 +1,5 @@
+Transactions
+- a group of query that execute together
+Optimistic lock vs pestimistic lock
+- optemistic: we don't assume there's any error, we allow concurrency assume there's no conflicts
+  - so how do we maintain thread safe?
