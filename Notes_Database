@@ -10,12 +10,14 @@ Optimistic lock vs pestimistic lock
 * implementation depends on what tool you chose, trade off pros and cons
 
 Distributed = when multiple microservices or DBs are involved.
+Distributed transaction concerns: when dif
 Approaches:
-Distributed Lock (e.g., Redis-based Redlock)
-One service holds a short lock while updating.
-Two-Phase Commit (2PC)
-Coordinator asks all participants to “prepare” → “commit”.
-Atomic but slow, used in financial systems.
-Saga Pattern
-Breaks big transaction into steps, each with a compensating action.
-Preferred for microservices.
+1. Distributed Lock (e.g., Redis-based Redlock)
+    One service holds a short lock while updating.
+2. Two-Phase Commit (2PC)
+  Coordinator asks all participants(microservices) to “prepare” → “commit”.
+  when we say "ready", what does that mean? -> 
+  Atomic but slow, used in financial systems.
+3. Saga Pattern
+  Breaks big transaction into steps, each with a compensating action.
+  Preferred for microservices.
