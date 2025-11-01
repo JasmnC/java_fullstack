@@ -18,7 +18,7 @@ Approaches:
   Coordinator asks all participants(microservices) to “prepare” → “commit”. (if prepare phase fail, they rollback)
   when we say "ready", what does that mean? -> check execution conditions
   who's going to check? -> we have a centralized "coordinator"(master)(our springboot in this case) and each microservice is like worker
-  Atomic, simple, but slow, used in financial systems.
+  trade-off -> it's against microservice(we're tieing them back together), strong atomicy
 3. Saga Pattern
   Breaks big transaction into steps, each with a compensating action.
   Preferred for microservices.
