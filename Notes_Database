@@ -32,7 +32,8 @@ Approaches:
 SQL optimization
 1. Identify first!!
 execution plan, explain statement
-2. Indexing: cluster index, primary key
-
+2. Query optimization
+- Indexing: cluster index, primary key
+3. Cache
 
 
