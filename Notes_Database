@@ -29,12 +29,14 @@ Approaches:
   * if you need each step monitor, must use orchestration
   * higher consistency, higher avalilbility
 
-SQL optimization
+Database optimization
 1. Identify first!!
 execution plan, explain statement
 2. Query optimization
 - Indexing: cluster index, primary key
-3. Cache
+3. Cache -> very useful in practice
+4. Sharding
+
 
 ALWAYS LOCATE THE PROBLEM FIRST BEFORE JUMPING TO SOLUTION
 
