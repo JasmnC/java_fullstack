@@ -29,4 +29,10 @@ Approaches:
   * if you need each step monitor, must use orchestration
   * higher consistency, higher avalilbility
 
+SQL optimization
+1. Identify first!!
+execution plan, explain statement
+2. Indexing: cluster index, primary key
+
+
 
