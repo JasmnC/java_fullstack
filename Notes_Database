@@ -19,8 +19,14 @@ Approaches:
   when we say "ready", what does that mean? -> check execution conditions
   who's going to check? -> we have a centralized "coordinator"(master)(our springboot in this case) and each microservice is like worker
   trade-off -> it's against microservice(we're tieing them back together), strong atomicy
+  * single point failuare, lower avalilbility
 3. Saga Pattern
   Breaks big transaction into stages, each with a compensating action.
   two styles: choreography, orchestration
   choreography -> take away coordinator, each of the worker execute on their own(each have to define rollback)-> chain flow
   orchestration -> still have a coordinator
+  * depends on how complicate it is, 3-5 steps choreography makes more sence, 30 steps choreography
+  * if you need each step monitor, must use orchestration
+  * higher consistency, higher avalilbility
+
+
