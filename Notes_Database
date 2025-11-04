@@ -40,4 +40,12 @@ execution plan, explain statement
 
 ALWAYS LOCATE THE PROBLEM FIRST BEFORE JUMPING TO SOLUTION
 
+NoSQL database
+MongoDB
+- in storage
+Redis
+- in memory
+
+If there's a chance you can solve on local(RAM) the performance will be better -> multi
+
 
