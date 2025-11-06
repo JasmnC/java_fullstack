@@ -4,6 +4,28 @@ On EC2:
   
 On instance:
   1. Set up docker first
+  - make the yml file
+docker compose up -d
 
 On local machine:
   1. Build jar
+  2. Upload the jar to instance 
+scp -i ~/Downloads/springbok-key.pem /Users/yuujadz/Downloads/Rothur_code-Nov-3-class-code/target/demo-0.0.1-SNAPSHOT.jar ubuntu@<EC2-IP>:/home/ubuntu/
+
+Once uploaded, ssh into the instance
+ssh -i ~/Downloads/springbok-key.pem ubuntu@<EC2-IP>
+
+(run docker)
+check docker: docker ps
+run docker: docker compose up -d
+
+Start app
+nohup java -jar demo-0.0.1-SNAPSHOT.jar --server.port=8080 > app.log 2>&1 &
+
+Validate started
+ps aux | grep demo
+
+Kill app
+pkill -f demo-0.0.1-SNAPSHOT.jar || true
+
+
