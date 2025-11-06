@@ -1,0 +1,2 @@
+On EC2:
+  create EC2 instance, create VPC and subnet, enable incound rules (port22 and port8080)
