@@ -1,2 +1,9 @@
 On EC2:
   create EC2 instance, create VPC and subnet, enable incound rules (port22 and port8080)
+  save key.pem
+  
+On instance:
+  1. Set up docker first
+
+On local machine:
+  1. Build jar
