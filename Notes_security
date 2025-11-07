@@ -29,3 +29,6 @@ you never sign up -> means you never have a username/password -> then how they k
 - sign-in request get *redirect* to gmail server
 - redirect URL, app_id
 - OIDC (open ID connector)
+
+CORS/CSRF
+register your app to google or github, implement with app_id
