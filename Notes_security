@@ -15,5 +15,11 @@ fail? 401     <-> 403
 *how do they check? it's all aop
 *how to do it in spring security
 
+How to avoid repeatly checkiing authentication?
+Toekn save in cookie
+JWT token (most popular type)->3 parts{header, payload, signiture
+* header is like HS256 type: JWT, payload name: David, id:101, signiture is like  header+salt(going to be a very long random info)
+Bearer token
+
 
 
