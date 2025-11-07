@@ -21,5 +21,11 @@ JWT token (most popular type)->3 parts{header, payload, signiture
 * header is like HS256 type: JWT, payload name: David, id:101, signiture is like  header+salt(going to be a very long random info)
 Bearer token
 
+sticky session -> if it's from this IP, always use this server
 
-
+Login via google account:
+you never sign up -> means you never have a username/password -> then how they know who you are and let you in?
+- google do it for them, you have to register with gmail server, they will give you an app_id
+- sign-in request get *redirect* to gmail server
+- redirect URL, app_id
+- OIDC (open ID connector)
