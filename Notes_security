@@ -1,0 +1,11 @@
+HTTPS
+- Client goinf to talk to server first(3 handshake)
+
+Authentication vs Authorization
+who you are   <-> what you can do
+* Role-base control by authentication
+
+                who you are
+                    |
+  Client            V               Backend
+            -----user/passwrd---->
