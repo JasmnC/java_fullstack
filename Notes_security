@@ -12,4 +12,8 @@ fail? 401     <-> 403
             -----user/passwrd---->
 
 
+*how do they check? it's all aop
+*how to do it in spring security
+
+
 
