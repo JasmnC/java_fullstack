@@ -29,4 +29,5 @@ configuration server
 and multiple modules
 
 before micro-service, it's called monolithic -> just have a giant project with many modules
+* micro-service rely on http -> reply on I/O -> way faster
 
