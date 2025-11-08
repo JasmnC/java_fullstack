@@ -9,3 +9,7 @@ Asynchronous style
 - message queue
 - problem: if downstream is down, upstream wouldn't know(stuck in await) -> implement actuator, but what if there's tens of thousands of them?
   -> service discovery
+- monitor
+
+* if ALL of your servers are down, you're fucked, but at least tell the user tell them 1. page is under maintenance; 
+2. send a message said order received/confirmed, and dump all orders into database first -> reservoir solution(for some business)
