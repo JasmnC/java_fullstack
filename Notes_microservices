@@ -18,5 +18,12 @@ stateless idenpotent is having more advantage -> if they're down, you can swap a
 but when it's stateful, you loss all the states
 
 * circuit breaker, normally it's just comming in and out as normal. -> when X% of request is down, circuit breaker will open and switch to maintenance page/reservoir
+* yml file (configuration) not suppose to go with jar file-> we need a configuration server
 
-* security concerns
+Microservice architecture:
+API gateways
+service discovery
+circuit breaker
+monitoring
+configuration server
+and multiple modules
