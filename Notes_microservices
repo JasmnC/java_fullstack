@@ -13,3 +13,10 @@ Asynchronous style
 
 * if ALL of your servers are down, you're fucked, but at least tell the user tell them 1. page is under maintenance; 
 2. send a message said order received/confirmed, and dump all orders into database first -> reservoir solution(for some business)
+
+stateless idenpotent is having more advantage -> if they're down, you can swap all instance and reboot them
+but when it's stateful, you loss all the states
+
+* circuit breaker, normally it's just comming in and out as normal. -> when X% of request is down, circuit breaker will open and switch to maintenance page/reservoir
+
+* security concerns
