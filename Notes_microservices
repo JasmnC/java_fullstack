@@ -1,0 +1,11 @@
+How does multiple spring boots communicate with each other?
+Synchronise style
+- REST endpoint with HTTP/HTTPS
+  - but whoever sent the request has to hang there
+  - when you see for processors, for example Intel Xeon, 288 p-core, 128 e-core, 
+    let's say we can have 10 threads(but 2threads/core is more practical) on each core, it's only able to handle 4k users at one time
+  - so we want to avoid syncronise in web-app
+Asynchronous style
+- message queue
+- problem: if downstream is down, upstream wouldn't know(stuck in await) -> implement actuator, but what if there's tens of thousands of them?
+  -> service discovery
