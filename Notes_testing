@@ -1,67 +1,93 @@
+
 1. Source Stage (SCM Integration)
-  - Purpose: pull the latest code and ensure that your pipeline automatically reacts to changes in the repository.
-When to Use
-Use this stage whenever your application source code is stored in Git-based platforms such as GitHub, GitLab, or Bitbucket. It is essential for any automated development workflow.
-Tech Stack and Usage
-SCM: Git, GitHub, GitLab, Bitbucket
-Triggering: Webhooks, scheduled builds
-Jenkinsfile: Pipeline definitions written in Groovy
+
+   * Purpose: Pulls the latest code and ensures the pipeline automatically reacts to repository changes.
+   * When to Use: When source code is stored in Git-based platforms such as GitHub, GitLab, or Bitbucket.
+   * Tech Stacks:
+
+     * SCM: Git, GitHub, GitLab, Bitbucket
+     * Triggering: Webhooks, scheduled builds
+   * Jenkinsfile: Pipeline definitions written in Groovy
+
 2. Build Stage
-  - Purpose: compiles the application, installs dependencies, and prepares the codebase for testing and packaging.
-When to Use
-Use this stage for any project requiring compilation or dependency resolution. It is required for back-end services, microservices, or applications with build steps.
-Tech Stack and Usage
-Java: Maven, Gradle
-Python: virtualenv, pip
-JavaScript: npm, yarn
-Container-based: Dockerfile builds
+
+   * Purpose: Compiles the application, installs dependencies, and prepares the codebase for testing and packaging.
+   * When to Use: When working on any project that requires compilation or dependency resolution (Java, Python, Node, etc.).
+   * Tech Stacks:
+
+     * Build Tools: Maven, Gradle, npm, yarn, pip
+     * Container Build: Dockerfile, Buildah
+   * Jenkinsfile: Defines build steps using shell commands or reusable shared libraries
+
 3. Test Stage
-Purpose
-This stage ensures code correctness, quality, and compliance before moving into deployment.
-When to Use
-Use this stage whenever your application has automated tests, static analysis, linting rules, or compliance checks. It is important for production-quality software.
-Tech Stack and Usage
-Testing frameworks: JUnit, PyTest, Jest
-Static analysis: SonarQube, ESLint, Pylint, Checkstyle
-Security scanning: Trivy, OWASP Dependency-Check
+
+   * Purpose: Ensures code correctness, reliability, and quality before deployment.
+   * When to Use: When the application has unit tests, integration tests, or static analysis requirements.
+   * Tech Stacks:
+
+     * Test Frameworks: JUnit, PyTest, Jest
+     * Static Analysis: SonarQube, ESLint, Pylint, Checkstyle
+     * Security Scanning: OWASP Dependency-Check, Trivy
+   * Jenkinsfile: Includes test execution, results publishing, and quality gate logic
+
 4. Artifact Packaging Stage
-Purpose
-This stage packages the application into a deployable format, such as binary artifacts or container images. It also stores these artifacts in a registry for later use.
-When to Use
-Use this stage when you need reproducible builds or when deploying across multiple environments. Critical for microservices, cloud-native applications, and containerized deployments.
-Tech Stack and Usage
-Artifact packaging: JAR/WAR files, ZIP, wheel
-Container images: Docker, Buildah
-Artifact registries: Docker Hub, AWS ECR, GCP Artifact Registry, Nexus, Artifactory
-5. Deployment Stages
-Purpose
-These stages deliver the application into specific environments such as development, testing, staging, and production.
-Use Case: Dev Deployment
-Used for fast, iterative deployments after initial build and testing. Suitable for developer validation and integration testing.
-Use Case: QA/Staging Deployment
-Used when verifying application functionality in a controlled environment. Supports user acceptance testing, regression testing, and pre-production checks.
-Use Case: Production Deployment
-Used when releasing stable builds to end users. Often requires approval, rollback strategies, and monitoring.
-Tech Stack and Usage
-Deployment scripts: Bash, Python, Ansible
-Container orchestration: Kubernetes, Helm, ArgoCD
-Traditional servers: SSH-based deployment, systemd
-Cloud platforms: AWS ECS/EKS, Azure AKS, Google GKE
-6. Monitoring and Post-Deployment Stage
-Purpose
-Monitors application health, validates that deployments are functioning correctly, and sends notifications about build results.
-When to Use
-Use this stage for any production deployment, or when you require operational visibility. Also used for automated health checks after deployment.
-Tech Stack and Usage
-Health checks: curl, API endpoints
-Monitoring platforms: Prometheus, Grafana, Datadog, New Relic
-Notification tools: Slack, Email, Microsoft Teams
-* Pipeline Governance and Controls
-Purpose
-Provides quality gates, approval mechanisms, and policies to control how code moves across environments.
-When to Use
-Use governance controls when handling sensitive or high-impact deployments such as financial services, healthcare, or large distributed teams.
-Tech Stack and Usage
-Manual approvals: Jenkins input steps
-Access control: Role-based permissions in Jenkins
-Automated gates: SonarQube Quality Gates, security scans
+
+   * Purpose: Packages the application into a deployable format such as binaries or container images.
+   * When to Use: When you need a consistent build output for deploying across multiple environments.
+   * Tech Stacks:
+
+     * Packaging Formats: JAR/WAR, Python wheel, ZIP archives
+     * Containerization: Docker, Buildah
+     * Artifact Registries: Docker Hub, AWS ECR, GCP Artifact Registry, Nexus, Artifactory
+   * Jenkinsfile: Handles packaging and pushing artifacts to registries
+
+5. Deployment to Development Environment
+
+   * Purpose: Allows developers to validate integrations and basic functionality after building and testing.
+   * When to Use: During frequent iteration cycles or feature development.
+   * Tech Stacks:
+
+     * Deployment Scripts: Bash, Python, Ansible
+     * Platforms: Docker Compose, Kubernetes (dev namespaces), local servers
+   * Jenkinsfile: Executes automated deployment scripts for the dev environment
+
+6. Deployment to QA / Staging Environment
+
+   * Purpose: Enables testing teams to validate the application in a more controlled, production-like environment.
+   * When to Use: Before production release, for UAT, regression testing, and integration testing.
+   * Tech Stacks:
+
+     * Orchestration: Kubernetes, Helm, ArgoCD
+     * Testing Tools: Selenium, Postman, JMeter
+   * Jenkinsfile: Adds steps for environment-specific deployment and running extended test suites
+
+7. Deployment to Production Environment
+
+   * Purpose: Releases stable builds to end users with safety controls and governance.
+   * When to Use: When the application is ready for customer consumption or business operations.
+   * Tech Stacks:
+
+     * Infrastructure: AWS ECS/EKS, Azure AKS, Google GKE, on-prem servers
+     * Release Strategies: Blue-green deployment, rolling update, canary release
+   * Jenkinsfile: Includes manual approvals, rollback handling, and production-specific deployment steps
+
+8. Post-Deployment and Monitoring Stage
+
+   * Purpose: Validates deployment health and provides visibility into system performance.
+   * When to Use: After any deployment, especially in staging and production.
+   * Tech Stacks:
+
+     * Monitoring: Prometheus, Grafana, Datadog, New Relic
+     * Logging: ELK Stack, Loki
+     * Notifications: Slack, Email, Microsoft Teams
+   * Jenkinsfile: Adds health checks, reporting, and notifications
+
+9. Governance, Approvals, and Quality Controls
+
+   * Purpose: Adds safety, compliance, and policy enforcement across environments.
+   * When to Use: For sensitive, regulated, or high-risk applications, or when multiple teams are involved.
+   * Tech Stacks:
+
+     * Quality Gates: SonarQube, SAST tools, vulnerability scanners
+     * Access Control: Jenkins RBAC, credential bindings
+   * Jenkinsfile: Uses approval gates, conditional steps, and automated policy checks
