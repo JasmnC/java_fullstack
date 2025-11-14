@@ -1,0 +1,279 @@
+CI/CD with Jenkins
+
+1. Source stage
+  - Jenkin + GitHub/GitLab/Bitbucket
+  - Webhook trigger
+  - Stored at the repo root
+groovy
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+  }
+}
+
+2. Build stage
+
+
+**Goal:** Compile source code, resolve dependencies, build artifacts.
+
+**Typical tools by language:**
+
+* Java → Maven/Gradle
+* Python → virtualenv, setup.py
+* Node → npm/yarn
+* Docker → Dockerfile
+
+**Example Groovy (Maven build):**
+
+```groovy
+stage('Build') {
+  steps {
+    sh 'mvn clean package -DskipTests'
+  }
+}
+```
+
+---
+
+# **3. Test Stage**
+
+**Goal:** Run automated tests → unit, integration, static analysis.
+
+### **Unit Tests**
+
+```groovy
+stage('Unit Tests') {
+  steps {
+    sh 'mvn test'
+  }
+  post {
+    always {
+      junit '**/target/surefire-reports/*.xml'
+    }
+  }
+}
+```
+
+### **Linting / Code Quality**
+
+* Tools: SonarQube, ESLint, Pylint, Checkstyle
+
+```groovy
+stage('Static Analysis') {
+  steps {
+    sh 'mvn sonar:sonar'
+  }
+}
+```
+
+---
+
+# **4. Build Artifact Packaging Stage**
+
+**Goal:** Package binary/Docker container for deployment.
+
+### **Docker Build**
+
+```groovy
+stage('Build Docker Image') {
+  steps {
+    script {
+      dockerImage = docker.build("my-app:${env.BUILD_NUMBER}")
+    }
+  }
+}
+```
+
+### **Store Image in Registry**
+
+* AWS ECR
+* Docker Hub
+* GCP Artifact Registry
+
+```groovy
+stage('Push to Registry') {
+  steps {
+    script {
+      docker.withRegistry('https://index.docker.io/v1/', 'docker-creds') {
+        dockerImage.push()
+      }
+    }
+  }
+}
+```
+
+---
+
+# **5. Deployment Stages (CD)**
+
+You typically break these into:
+
+---
+
+## **5.1. Dev Environment Deployment**
+
+Used for verification, basic testing.
+
+```groovy
+stage('Deploy to Dev') {
+  steps {
+    sh './deploy-dev.sh'
+  }
+}
+```
+
+---
+
+## **5.2. QA / Staging Deployment**
+
+Used for integration tests, regression tests, user acceptance tests.
+
+```groovy
+stage('Deploy to QA') {
+  when {
+    branch 'main'
+  }
+  steps {
+    sh './deploy-qa.sh'
+  }
+}
+```
+
+Automated test gates can be added:
+
+```groovy
+stage('Integration Tests') {
+  steps {
+    sh './run_integration_tests.sh'
+  }
+}
+```
+
+---
+
+## **5.3. Production Deployment**
+
+Can be:
+
+* Automated (continuous deployment)
+* Manual approval (continuous delivery)
+
+### **Manual Approval Example**
+
+```groovy
+stage('Approval') {
+  steps {
+    input message: "Deploy to production?"
+  }
+}
+```
+
+```groovy
+stage('Deploy to Prod') {
+  steps {
+    sh './deploy-prod.sh'
+  }
+}
+```
+
+---
+
+# **6. Post-Deployment Monitoring Stage**
+
+Add monitoring & reporting hooks:
+
+### **Health Checks**
+
+```groovy
+stage('Health Check') {
+  steps {
+    sh 'curl -f http://prod-app/health'
+  }
+}
+```
+
+### **Notifications (Slack/Email)**
+
+```groovy
+post {
+  failure {
+    slackSend channel: '#devops', message: "Build ${env.BUILD_NUMBER} failed!"
+  }
+}
+```
+
+---
+
+# **7. Full Declarative Jenkins Pipeline Example (Complete)**
+
+```groovy
+pipeline {
+  agent any
+
+  environment {
+    REGISTRY = "docker.io/myrepo"
+  }
+
+  stages {
+    stage('Checkout') {
+      steps { checkout scm }
+    }
+
+    stage('Build') {
+      steps { sh 'mvn clean package -DskipTests' }
+    }
+
+    stage('Unit Tests') {
+      steps { sh 'mvn test' }
+      post { always { junit '**/target/surefire-reports/*.xml' } }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        script {
+          dockerImage = docker.build("${REGISTRY}/my-app:${env.BUILD_NUMBER}")
+        }
+      }
+    }
+
+    stage('Push Docker Image') {
+      steps {
+        script {
+          docker.withRegistry('', 'docker-creds') {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+
+    stage('Deploy to Dev') {
+      steps { sh './deploy-dev.sh' }
+    }
+
+    stage('Approval') {
+      steps {
+        input message: "Proceed to production?"
+      }
+    }
+
+    stage('Deploy to Prod') {
+      steps { sh './deploy-prod.sh' }
+    }
+
+    stage('Health Check') {
+      steps { sh 'curl -f http://prod-app/health' }
+    }
+  }
+
+  post {
+    always {
+      echo "Pipeline finished"
+    }
+  }
+}
+```
