@@ -31,3 +31,67 @@ and multiple modules
 before micro-service, it's called monolithic -> just have a giant project with many modules
 * micro-service rely on http -> reply on I/O -> way faster
 
+
+
+
+Spring cloud:
+                   ┌─────────────────────────┐
+                   │    API Gateway (Edge)   │
+                   └───────────▲─────────────┘
+                               │
+                    ┌──────────┼──────────┐
+                    ▼          ▼          ▼
+            ┌──────────┐ ┌──────────┐ ┌──────────┐
+            │ User Svc │ │ Order Svc│ │ Payment  │
+            └──────────┘ └──────────┘ │  Svc     │
+                                       └──────────┘
+            ┌─────────────────────────────────────┐
+            │        Discovery Server (Eureka)     │
+            └─────────────────────────────────────┘
+
+            ┌─────────────────────────────────────┐
+            │       Config Server (Git backed)    │
+            └─────────────────────────────────────┘
+
+            ┌─────────────────────────────────────┐
+            │    Kafka / RabbitMQ (Async Events)  │
+            └─────────────────────────────────────┘
+
+            ┌─────────────────────────────────────┐
+            │  Monitoring: Prometheus + Grafana   │
+            └─────────────────────────────────────┘
+
+            ┌─────────────────────────────────────┐
+            │ Logs: ELK / OpenSearch Stack        │
+            └─────────────────────────────────────┘
+
+            ┌─────────────────────────────────────┐
+            │ Tracing: Zipkin / Jaeger (Sleuth)   │
+            └─────────────────────────────────────┘
+
+Kubernates:
++------------------------------------------------------------------+
+|                   Kubernetes Cluster (EKS/GKE/AKS)               |
++------------------------------------------------------------------+
+| Ingress Gateway (Nginx / Istio Gateway / Kong Gateway)           |
++------------------------------------------------------------------+
+| Istio Service Mesh (Optional but Recommended)                    |
+| - mTLS, retries, circuit breaker, telemetry                      |
+| - Traffic shifting (blue/green, canary)                          |
++------------------------------------------------------------------+
+           |                    |                |
+  ┌────────┘         ┌─────────┘        ┌──────────┘
+  ▼                  ▼                  ▼
+User Pod        Order Pod          Payment Pod
+ConfigMap       ConfigMap          ConfigMap
+Secret          Secret             Secret
+PVC             PVC                PVC
+
++------------------------------------------------------------------+
+|   Observability: Prometheus + Grafana + Loki + Jaeger            |
++------------------------------------------------------------------+
+|   Messaging: Kafka (Strimzi Operator)                            |
++------------------------------------------------------------------+
+|   Storage: PostgreSQL, MongoDB, Redis via Helm charts            |
++------------------------------------------------------------------+
+
